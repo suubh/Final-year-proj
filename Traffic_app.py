@@ -1,13 +1,14 @@
 from flask import *
 import os
 from werkzeug.utils import secure_filename
-from keras.models import load_model
-import numpy as np
-from PIL import Image
-UPLOAD_FOLDER = 'static/uploads/'
+# from keras.models import load_model
+# import numpy as np
+# from PIL import Image
+upload_folder = 'static/'
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
 
 app = Flask(__name__)
+app.config['UPLOAD_FOLDER'] = upload_folder
 
 # Classes of trafic signs
 classes = { 0:'Speed limit (20km/h)',
@@ -55,14 +56,15 @@ classes = { 0:'Speed limit (20km/h)',
             42:'End no passing vehicle > 3.5 tons' }
 
 def image_processing(img):
-    model = load_model('./model/TSR.h5')
-    data=[]
-    image = Image.open(img)
-    image = image.resize((30,30))
-    data.append(np.array(image))
-    X_test=np.array(data)
-    Y_pred = model.predict_classes(X_test)
-    return Y_pred
+    pass
+    # model = load_model('./model/TSR.h5')
+    # data=[]
+    # image = Image.open(img)
+    # image = image.resize((30,30))
+    # data.append(np.array(image))
+    # X_test=np.array(data)
+    # Y_pred = model.predict_classes(X_test)
+    # return Y_pred
 
 @app.route('/')
 def index():
@@ -83,13 +85,13 @@ def upload():
         os.remove(file_path)
         return result
     return None
-@app.route('/', methods=['POST'])
+@app.route('/image', methods=['POST'])
 def upload_image():
     if request.method == 'POST':
-        if request.files:
-            image - request.files["image"]
-            image.save(os.path.join(app.config["IMAGE_UPLOADS"], image.filename))
-            return render_template("index.html", uploaded_image=image.filename)
+        image = request.files["file"]
+        img_path = os.path.join(app.config["UPLOAD_FOLDER"], "test.jpg")
+        image.save(img_path)
+        return render_template("index.html")
     return render_template("index.html")
 
 

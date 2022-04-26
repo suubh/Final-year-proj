@@ -5,14 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Final Year Project</title>
     <link href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="../templates/style.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='style.css') }}" />
   </head>
 
   <body>
     <nav class="navbar navbar-expand-lg py-3 navbar-dark bg-dark shadow-sm">
       <div class="container">
         <a href="#" class="navbar-brand">
-          <img src="../logo.png" width="45" alt="" class="d-inline-block align-middle mr-2">
+          <img src="{{url_for('static', filename='logo.png')}}" width="45" alt="" class="d-inline-block align-middle mr-2">
           <span class="text-uppercase font-weight-bold">Traffic Sign Classifier</span>
         </a>
 
@@ -37,17 +37,20 @@
             <!-- Here is the main functaion of this project: -->
            <div class="upload">
              <div class="up">
-              <form id="upload-file" method="post" enctype="multipart/form-data">
+              <form id="upload-file" method="post" action="/image" enctype="multipart/form-data">
               
               <input
                 type="file"
                 name="file"
                 id="imageUpload"
                 accept=".png, .jpg, .jpeg"
-              /></form><br>
-              <label for="imageUpload" class="upload-label"> <button type="button" class="btn btn-dark">Upload</button> </label>  
+              />
+              <label for="imageUpload" class="upload-label"> <button type="submit" class="btn btn-dark">Upload</button> </label> 
+            </form><br>
+               
             </form>
             <h3 id="result">
+              <img src="{{url_for('static', filename='test.jpg')}}" class="img-fluid" alt="Press The Predict button"><br>
               <span style="color:black; font-size: 25px; "> The Speed limit is 50 km/h. </span>
             </h3>
             </div>
