@@ -4,6 +4,8 @@ from werkzeug.utils import secure_filename
 from keras.models import load_model
 import numpy as np
 from PIL import Image
+UPLOAD_FOLDER = 'static/uploads/'
+ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
 
 app = Flask(__name__)
 
@@ -81,6 +83,16 @@ def upload():
         os.remove(file_path)
         return result
     return None
+@app.route('/', methods=['POST'])
+def upload_image():
+    if request.method == 'POST':
+        if request.files:
+            image - request.files["image"]
+            image.save(os.path.join(app.config["IMAGE_UPLOADS"], image.filename))
+            return render_template("index.html", uploaded_image=image.filename)
+    return render_template("index.html")
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)
