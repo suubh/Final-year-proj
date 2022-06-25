@@ -21,7 +21,6 @@
 # _DATASET & DATA PREPROCESSING_
 - We are using the benchmark dataset GTSRB (German Traffic Sign Recognition Benchmark) . It has around 51,839 images of road signs, divided into 43 classes.
 ![238914-pdf 5-15-2022 8-56-00 PM](https://user-images.githubusercontent.com/47265493/175783901-8c327ace-463d-48da-a099-98f99f066a4d.png)
-![Dissertation--27-28-29-30- - Google Docs 5-19-2022 12-54-31 PM](https://user-images.githubusercontent.com/47265493/175783911-3b76d9f6-b6ac-46c3-8ed9-c4f792523aaa.png)
 - We used Kaggle API to get the GTSRB data in our Google Colab notebook and extracted the dataset at runtime. The information in the form of image is 39,209 and we fixed all the image sizes to be 30x30.
 - All the images and their labels with respect to their classes were stored in data and labels in a python list and then converted into a numpy array. Then the train_test_split of sklearn.model_selection is used to create X_train, X_test, y_train and y_test.
 
